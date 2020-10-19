@@ -27,14 +27,14 @@ public class FuncionarioController {
 	@Autowired
 	FuncionarioServiceImp funcionarioService;
 
-	
+
 	@ApiOperation(value = "Retorna uma lista de pessoas")
 	@ApiResponses(value = {
 	    @ApiResponse(code = 200, message = "Retorna a lista de pessoa"),
 	    @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
 	    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
-	@GetMapping(value = "{id}", produces="application/json")
+	@GetMapping("{id}")
 	public ResponseEntity<Funcionario> getOne(@PathVariable long id) throws ExceptFuncionario {
 		Funcionario funcionario = this.funcionarioService.getOne(id).get();
 
