@@ -20,18 +20,5 @@ public class SbestudoApplication {
 		SpringApplication.run(SbestudoApplication.class, args);
 	}
 	
-	@GetMapping("/")
-	public String teste() {
-		return "index";
-	}
-
-	@GetMapping("/home")
-	public String home() {
-		return "home";
-	}
-
-	@GetMapping("/login")
-	public String login() {
-		return "login";
-	}
+	
 }

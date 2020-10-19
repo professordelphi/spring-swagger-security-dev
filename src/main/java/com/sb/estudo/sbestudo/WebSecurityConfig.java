@@ -1,12 +1,19 @@
 package com.sb.estudo.sbestudo;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
+@ComponentScan("com.sb.estudo.sbestudo")  
+@EnableWebSecurity  
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
@@ -25,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 	}
 */
-	
+	/*
 	 @Override
 	    protected void configure(HttpSecurity httpSecurity) throws Exception {
 	        httpSecurity
@@ -46,8 +53,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	                .inMemoryAuthentication()
 	                .withUser("admin").password("{noop}admin").roles("ADMIN")
 	                .and().withUser("user").password("{noop}user").roles("USER");
-	    }
+	    }*/
 	
+	@SuppressWarnings("deprecation")
+	@Bean  
+    public UserDetailsService userDetailsService() {  
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();  
+        manager.createUser(User.withDefaultPasswordEncoder().username("javatpoint").  
+        password("java123").roles("USER").build());  
+        return manager;  
+    }  
+      
+    protected void configure(HttpSecurity http) throws Exception {  
+                  
+        http  
+        .antMatcher("/")                                 
+        .authorizeRequests()  
+            .anyRequest().hasRole("ADMIN")  
+            .and()  
+        .httpBasic();  
+    }  
 	
+	  
 	
 }
