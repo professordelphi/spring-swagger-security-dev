@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 

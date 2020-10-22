@@ -2,11 +2,9 @@ package com.sb.estudo.sbestudo.controller;
 
 import java.io.File;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import jdk.internal.org.jline.utils.Log;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -46,10 +44,10 @@ public class HomeController {
 			   File arquivo = new File(url.append(this.file).toString());
 			   //	File arquivo = new File("C:\\temp\\sbestudo\\pravaler.txt");
 
-		Log.info(arquivo.getPath());
+		log.info(arquivo.getPath());
 		   
 		   if (!arquivo.exists()) {
-			   Log.info("Arquivo não encontrado");
+			   log.info("Arquivo não encontrado");
 		   } else {
 
 		       // Diretorio de destino
@@ -58,12 +56,12 @@ public class HomeController {
 		       // Move o arquivo para o novo diretorio
 		       boolean sucesso = arquivo.renameTo(new File(diretorioDestino, arquivo.getName()));
 		       if (sucesso) {
-		    	   Log.info("Arquivo movido para '" + diretorioDestino.getAbsolutePath() + "'");
+		    	   log.info("Arquivo movido para '" + diretorioDestino.getAbsolutePath() + "'");
 		    	   
 		    	   return retornado;
 		    	   
 		       } else {
-		    	   Log.info("Erro ao mover arquivo '" + arquivo.getAbsolutePath() + "' para '"
+		    	   log.info("Erro ao mover arquivo '" + arquivo.getAbsolutePath() + "' para '"
 		                   + diretorioDestino.getAbsolutePath() + "'");
 		    	   
 		       }
