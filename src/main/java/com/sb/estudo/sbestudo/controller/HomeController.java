@@ -1,23 +1,35 @@
 package com.sb.estudo.sbestudo.controller;
 
+
+
+
+
+
+
+
 import java.io.File;
 
 import org.springframework.stereotype.Component;
 
-import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
+
 @Component  
 public class HomeController {  
          
-    private static String protocolo="c:";
+	
+	public HomeController() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger("PaymentSurcharge");
+    private  String protocolo="c:";
 
     
-    private static String endereco="/temp";
+    private  String endereco="/temp";
 
    
-    private static String porta="/sbestudo";
+    private  String porta="/sbestudo";
 
    private String file;
    private String destino;
@@ -44,10 +56,10 @@ public class HomeController {
 			   File arquivo = new File(url.append(this.file).toString());
 			   //	File arquivo = new File("C:\\temp\\sbestudo\\pravaler.txt");
 
-		log.info(arquivo.getPath());
+		logger.info(arquivo.getPath());
 		   
 		   if (!arquivo.exists()) {
-			   log.info("Arquivo não encontrado");
+			   logger.info("Arquivo não encontrado");
 		   } else {
 
 		       // Diretorio de destino
@@ -56,12 +68,12 @@ public class HomeController {
 		       // Move o arquivo para o novo diretorio
 		       boolean sucesso = arquivo.renameTo(new File(diretorioDestino, arquivo.getName()));
 		       if (sucesso) {
-		    	   log.info("Arquivo movido para '" + diretorioDestino.getAbsolutePath() + "'");
+		    	   logger.info("Arquivo movido para '" + diretorioDestino.getAbsolutePath() + "'");
 		    	   
 		    	   return retornado;
 		    	   
 		       } else {
-		    	   log.info("Erro ao mover arquivo '" + arquivo.getAbsolutePath() + "' para '"
+		    	   logger.info("Erro ao mover arquivo '" + arquivo.getAbsolutePath() + "' para '"
 		                   + diretorioDestino.getAbsolutePath() + "'");
 		    	   
 		       }
