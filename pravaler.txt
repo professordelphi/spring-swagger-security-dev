@@ -1,0 +1,180 @@
+11:06 02/10/2020
+
+13 campos
+pravaler_REPROVADO_2792020.csv
+
+Biblioteca - para leitura do arquivo CSV
+https://pt.stackoverflow.com/questions/27013/como-ler-arquivos-csv-em-java
+
+
+
+<dependency>
+    <groupId>com.opencsv</groupId>
+    <artifactId>opencsv</artifactId>
+    <version>4.2</version>
+</dependency>
+
+ Reader reader = Files.newBufferedReader(Paths.get("nome-do-arquivo.csv"));
+    CSVReader csvReader = new CSVReaderBuilder(reader)
+                            .withSkipLines(1)//para o caso do CSV ter cabeçalho.
+                            .build();
+
+    List<String[]> linhas = csvReader.readAll();
+    for (String[] linha : linhas)
+        for (String[] coluna : linha)
+            System.out.print(coluna + " # ");
+        System.out.println();
+ 
+
+Acessei tambem para leitura 
+https://dicasdejava.com.br/como-ler-arquivos-csv-em-java/
+
+
+Linha de comando enviada por Robson
+
+
+Files.readAllLines(Paths.get(filename), StandardCharsets.UTF_8);
+********************************************************************
+
+Parte do metodo que utilizei para teste
+
+// 	System.out.println(Arrays.toString(textoSeparado));
+    	// 	Arrays.toString(textoSeparado);
+    
+    	integraPraValer.setIes(textoSeparado[0]);
+    	integraPraValer.setCampus(textoSeparado[1].toString());
+    	integraPraValer.setCpf(textoSeparado[2]);
+
+    	System.out.println(integraPraValer.getIes());
+    	System.out.println(integraPraValer.getCampus());
+    	System.out.println(integraPraValer.getCpf());
+
+***********************
+
+pesquisa
+https://stackoverflow.com/questions/15749192/how-do-i-load-a-file-from-resource-folder
+// java.net.URL
+URL url = ClassLoaderUtil.getResource("test.csv", YourCallingClass.class);
+Path path = Paths.get(url.toURI());
+List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+
+*****************************************
+
+https://www.devmedia.com.br/leitura-e-escrita-de-arquivos-json-em-java/27663 - criar um json
+
+
+****************************************
+FTP SPRING BOOT - dica do Robson
+https://www.baeldung.com/java-ftp-client
+
+
+**************
+
+		lerCsv(filename).stream().
+		
+		//.filter(p->!p.getIes().contains(IES)).forEach(
+				
+				l->System.out.println(
+				l.getIes() 
+		+ l.getCampus() 
+		+  l.getCpf()
+		+l.getNome()
+		+l.getCurso()
+		+ l.getStatusAvaliacao()
+			+l.getMotivoReprovacao()
+			+ l.getQuantidadeParcelas()
+			+ l.getMesInicial()
+			+l.getValorMensal()
+			+l.getRgm()
+			+l.getTipoAluno()
+			+l.getProduto()
+			
+			
+		//		)
+				
+				) ;
+		//IES, Campus, CPF, Aluno, Curso, Status Avaliacao, Motivo Reprovacao, Quantidade de Parcelas, Mes Inicial, 
+		//Valor Mensal, RGM, Tipo Aluno, Produto		
+	}
+
+	public static List<AlunoPraValerDTO> lerCsv(String filename) throws IOException {
+	
+
+		List<String> linhas = Files.readAllLines(Paths.get(filename), StandardCharsets.UTF_8);
+	
+		
+		return linhas.stream().filter(l -> !l.contains(IES) ).map(criandoObjetoAluno()).collect(Collectors.toList());
+
+	*****************************************	
+
+
+fileinputstream
+
+
+   public InputStream retrieveFileStream(String remote) throws IOException
+    {
+        return _retrieveFileStream(FTPCmd.RETR.getCommand(), remote);
+    }
+
+******************************************
+
+FTPClient ftp = new FTPClient();
+
+ftp.connect( server );
+
+ftp.login( user, password );
+
+ftp.changeWorkingDirectory (ftpFilePathName);
+
+String[] arq = ftp.listNames();
+
+
+System.out.println(ftp.listNames()[0]);
+
+System.out.println ("Listando arquivos: \n");
+
+for (String f : arq){
+
+	if (f.equals("pravaler_REPROVADO_2792020.csv"))
+	{
+System.out.println(f);
+LeitorCsv.lerCsv(    LeitorCsv.carregarFile(f)        ).stream()
+.forEach(l -> System.out.println(l.getIes() + l.getCampus() + l.getNome() + l.getStatusAvaliacao()
+
+));
+	}
+	else
+		System.err.println(f);
+
+}
+
+}
+
+
+
+**************
+public static void main(String[] args) throws IOException {
+		
+		File def = new File("src/main/resources/pravaler_REPROVADO_2792020.csv");
+		
+		System.out.println(def.toPath());
+		
+InputStream i=new FileInputStream(def);		
+		
+		System.out.println(i.available());
+	}
+
+
+======================
+///
+https://www.oracle.com/br/technical-resources/articles/java-stream-api.html
+
+
+[15:58] Robson de Menezes Santiago
+    http://10.10.1.44:9001/dashboard?id=br.edu.cruzeirodosul%3Abt-integra-pravaler
+​[15:59] Robson de Menezes Santiago
+    usuario desenv
+​[15:59] Robson de Menezes Santiago
+    senha desenv@123
+
+

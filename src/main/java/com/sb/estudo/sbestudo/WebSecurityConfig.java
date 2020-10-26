@@ -1,16 +1,53 @@
 package com.sb.estudo.sbestudo;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @Configuration
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-	/*@Override
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/**").permitAll().and().httpBasic() 
+				.and().csrf().disable();
+	}
+
+@Override
+protected void configure(AuthenticationManagerBuilder auth) throws Exception
+{
+auth.inMemoryAuthentication().withUser("dev").password("123").roles("ADMIN");
+}	
+
+
+		@Override
+	public void configure(WebSecurity web) throws Exception
+	{
+	web.ignoring().antMatchers("/**"); //web.ignoring().antMatchers("/materialize/**","/style/**")
+	}
+
+
+	}
+
+/*
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+@ComponentScan("com.sb.estudo.sbestudo")  
+@EnableWebSecurity  
+public class WebSecurityConfig  {
+
+
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/**").permitAll().and().httpBasic() //
 				.and().csrf().disable();
@@ -25,8 +62,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 	}
 */
-	
-	 @Override
+/*	
+	 
 	    protected void configure(HttpSecurity httpSecurity) throws Exception {
 	        httpSecurity
 	                .authorizeRequests().antMatchers("/").permitAll()
@@ -49,5 +86,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    }
 	
 	
+	@Bean  
+    public UserDetailsService userDetailsService() {  
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();  
+        manager.createUser(User.withDefaultPasswordEncoder().username("javatpoint").  
+        password("java123").roles("USER").build());  
+        return manager;  
+    }  
+      
+    protected void configure(HttpSecurity http) throws Exception {  
+                  
+        http  
+        .antMatcher("/")                                 
+        .authorizeRequests()  
+            .anyRequest().hasRole("ADMIN")  
+            .and()  
+        .httpBasic();  
+    }  
 	
-}
+*/
+	
+

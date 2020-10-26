@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -20,18 +19,5 @@ public class SbestudoApplication {
 		SpringApplication.run(SbestudoApplication.class, args);
 	}
 	
-	@GetMapping("/")
-	public String teste() {
-		return "index";
-	}
-
-	@GetMapping("/home")
-	public String home() {
-		return "home";
-	}
-
-	@GetMapping("/login")
-	public String login() {
-		return "login";
-	}
+	
 }
