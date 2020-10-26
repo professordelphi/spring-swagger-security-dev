@@ -22,14 +22,14 @@ public class HomeController {
 		// TODO Auto-generated constructor stub
 	}
 	
-	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger("PaymentSurcharge");
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger("Prav");
     private  String protocolo="c:";
 
     
     private  String endereco="/temp";
 
    
-    private  String porta="/sbestudo";
+    private  String porta="/sbestudo/";
 
    private String file;
    private String destino;

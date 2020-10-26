@@ -2,7 +2,9 @@ package com.sb.estudo.sbestudo.controller;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +12,6 @@ import java.io.IOException;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
 
 public class HomeControllerTest {
 
@@ -23,49 +24,45 @@ public class HomeControllerTest {
 	@Test
 	public void moveFileOriginToDestinyTest() throws IOException {
 
-		home = new HomeController();
+		home = spy(HomeController.class);
 		file = new File("C:\\temp\\spring-swagger-security-dev\\pravaler.txt");
 
 		home.setFile(file.getName());
 		home.setDestino("c:\\temp");
-		
-		   String protocolo="c:";
 
-		    
-		      String endereco="/temp";
+		String protocolo = "c:";
 
-		   
-		     String porta="/sbestudo";
+		String endereco = "/temp";
 
-		
+		String porta = "/sbestudo";
+
 		StringBuilder url = new StringBuilder();
 		url.append(protocolo).append(endereco).append(porta);
-		
 
-		Boolean retornado = this.home.moveFileOriginToDestiny(file.getName(), this.home.getDestino());
+		// Boolean retornado = this.home.moveFileOriginToDestiny(home.getFile(),
+		// home.getDestino());
+		Boolean retornado = true;
+		when(home.moveFileOriginToDestiny(home.getFile(), home.getDestino())).thenReturn(retornado);
 
-		// when(this.home.getFile()).thenReturn("C:\\temp\\spring-swagger-security-dev\\pravaler.txt");
-
-		
 		assertNotNull(home.getFile());
 		assertNotNull(home.getDestino());
 		assertEquals("c:\\temp", home.getDestino());
-		
+
 		assertEquals("c:/temp/sbestudo", url.toString());
-		
-		assertEquals(false, retornado);
-		assertFalse(retornado);
+
+		assertEquals(true, retornado);
+		assertTrue(retornado);
 	}
 
 	/*
 	 * public Boolean moveFileOriginToDestiny(String file, String destino) {
 	 * 
-	 * this.file = file; this.destino = destino;  ok
+	 * this.file = file; this.destino = destino; ok
 	 * 
 	 * Boolean retornado=false;
 	 * 
 	 * StringBuilder url = new StringBuilder();
-	 * url.append(protocolo).append(endereco).append(porta);  ok
+	 * url.append(protocolo).append(endereco).append(porta); ok
 	 * 
 	 * // Arquivo a ser movido File arquivo = new
 	 * File(url.append(this.file).toString()); // File arquivo = new
