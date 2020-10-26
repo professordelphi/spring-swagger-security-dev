@@ -10,13 +10,12 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 public class HomeControllerTest {
 
-	@InjectMocks
-	public HomeController home;
+	
+	
 
 	@Mock
 	File file;
@@ -24,7 +23,7 @@ public class HomeControllerTest {
 	@Test
 	public void moveFileOriginToDestinyTest() throws IOException {
 
-		home = spy(HomeController.class);
+	HomeController	home = spy(HomeController.class);
 		file = new File("C:\\temp\\spring-swagger-security-dev\\pravaler.txt");
 
 		home.setFile(file.getName());
@@ -39,8 +38,7 @@ public class HomeControllerTest {
 		StringBuilder url = new StringBuilder();
 		url.append(protocolo).append(endereco).append(porta);
 
-		// Boolean retornado = this.home.moveFileOriginToDestiny(home.getFile(),
-		// home.getDestino());
+//	 Boolean retornado = home.moveFileOriginToDestiny(home.getFile(),home.getDestino());
 		Boolean retornado = true;
 		when(home.moveFileOriginToDestiny(home.getFile(), home.getDestino())).thenReturn(retornado);
 

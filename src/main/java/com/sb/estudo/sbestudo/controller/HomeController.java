@@ -36,11 +36,7 @@ public class HomeController {
 
 	
 
-    public static void main(String[] args) {
-    	
-  // 	 moveFileOriginToDestiny("/pravaler.txt","/temp");
-   }
-
+  
     
 	public  Boolean moveFileOriginToDestiny(String file, String destino) {
 	
@@ -70,7 +66,7 @@ public class HomeController {
 		       if (sucesso) {
 		    	   logger.info("Arquivo movido para '" + diretorioDestino.getAbsolutePath() + "'");
 		    	   
-		    	   return retornado;
+		    	   return retornado=true;
 		    	   
 		       } else {
 		    	   logger.info("Erro ao mover arquivo '" + arquivo.getAbsolutePath() + "' para '"
