@@ -1,9 +1,9 @@
-<html>  
-<head>  
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-<title>Home Page</title>  
-</head>  
-<body>  
-Welcome to home page!  
-</body>  
-</html>  
+<h1>Login</h1>
+/views
+<form action="/login" method="post">
+
+	<label> User Name : <input type="text" name="username" value="admin"/> </label>
+	<label> Password : <input type="password" name="password" value="admin"/> </label>
+	<button type="submit" class="btn btn-default">Sign In</button>
+
+</form>

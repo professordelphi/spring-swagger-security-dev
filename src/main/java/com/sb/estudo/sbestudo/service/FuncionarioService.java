@@ -10,5 +10,5 @@ public interface FuncionarioService {
 	
 	public Optional<Funcionario> getOne(long id);
 	public Funcionario salvar(Funcionario funcionarioRequest);
-	
+	public void delete(Funcionario funcionarioRequest); 
 }

@@ -1,4 +1,4 @@
-package com.sb.estudo.sbestudo;
+package com.sb.estudo.sbestudo.security;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

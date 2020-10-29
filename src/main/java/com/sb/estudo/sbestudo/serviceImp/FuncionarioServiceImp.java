@@ -34,6 +34,11 @@ public class FuncionarioServiceImp implements FuncionarioService {
 		
 		
 	}
+
+	public void delete(Funcionario funcionarioRequest) {
+		// TODO Auto-generated method stub
+		this.funcionarioRepository.deleteById(funcionarioRequest.getId());
+	}
 	
 	
 	

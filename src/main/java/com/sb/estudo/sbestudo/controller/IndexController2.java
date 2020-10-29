@@ -9,16 +9,50 @@ package com.sb.estudo.sbestudo.controller;
 
 import java.io.File;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
 
-@Component  
-public class HomeController {  
+@Controller
+public class IndexController2 {  
          
 	
-	public HomeController() {
+	/*
+	 * @RequestMapping("/test") public ModelAndView teste(){
+	 * 
+	 * return new ModelAndView("teste");
+	 * 
+	 * }
+	 */
+	
+	
+	
+		@RequestMapping(value="/login",method=RequestMethod.GET)
+		public String busca(){
+			return "redirecionado";
+		}
+	
+	
+	@RequestMapping(value="/cad",method=RequestMethod.GET)
+	public String teste(){
+		return "index";
+	}
+	
+	@RequestMapping(value="/cadastrar", method=RequestMethod.GET)
+	public String form(RedirectAttributes attributes,BindingResult result){
+		
+		if(result.hasErrors()){
+			attributes.addFlashAttribute("mensagem", "Verifique os campos!");
+		}
+		return "teste";
+	}
+	
+	public IndexController2() {
 		// TODO Auto-generated constructor stub
 	}
 	

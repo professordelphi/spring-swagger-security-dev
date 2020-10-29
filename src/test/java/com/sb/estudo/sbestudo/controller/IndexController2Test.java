@@ -12,7 +12,7 @@ import java.io.IOException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-public class HomeControllerTest {
+public class IndexController2Test {
 
 	
 	
@@ -23,7 +23,7 @@ public class HomeControllerTest {
 	@Test
 	public void moveFileOriginToDestinyTest() throws IOException {
 
-	HomeController	home = spy(HomeController.class);
+	IndexController2	home = spy(IndexController2.class);
 		file = new File("C:\\temp\\spring-swagger-security-dev\\pravaler.txt");
 
 		home.setFile(file.getName());
