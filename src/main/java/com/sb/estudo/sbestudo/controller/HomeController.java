@@ -29,41 +29,38 @@ public class HomeController {
     private  String endereco="/temp";
 
    
-    private  String porta="/sbestudo/";
+    private   String porta="/sbestudo/";
 
-   private String file;
-   private String destino;
-
+  
 	
 
   
     
 	public  Boolean moveFileOriginToDestiny(String file, String destino) {
 	
-		this.file = file;
-		this.destino = destino;
-
+	
 		Boolean retornado=false;
 		
 		StringBuilder url = new StringBuilder();
         url.append(protocolo).append(endereco).append(porta);
 
 	     // Arquivo a ser movido
-			   File arquivo = new File(url.append(this.file).toString());
+			   File arquivo = new File(url.append(file).toString());
 			   //	File arquivo = new File("C:\\temp\\sbestudo\\pravaler.txt");
 
 		logger.info(arquivo.getPath());
 		   
-		   if (!arquivo.exists()) {
+		   if (!arquivo.exists() || file.equals("") ) {
 			   logger.info("Arquivo não encontrado");
+			   return false;
 		   } else {
 
 		       // Diretorio de destino
-		       File diretorioDestino = new File(this.destino);
-
-		       // Move o arquivo para o novo diretorio
-		       boolean sucesso = arquivo.renameTo(new File(diretorioDestino, arquivo.getName()));
-		       if (sucesso) {
+		       File diretorioDestino = new File(destino);
+Boolean sucesso = arquivo.renameTo(new File(diretorioDestino, arquivo.getName()));
+		      if (sucesso )  {
+		    	 // Move o arquivo para o novo diretorio
+		    	   
 		    	   logger.info("Arquivo movido para '" + diretorioDestino.getAbsolutePath() + "'");
 		    	   
 		    	   return retornado=true;
@@ -78,25 +75,7 @@ public class HomeController {
 	}
 
 
-	public String getFile() {
-		return file;
-	}
-
-
-	public void setFile(String file) {
-		this.file = file;
-	}
-
-
-	public String getDestino() {
-		return destino;
-	}
-
-
-	public void setDestino(String destino) {
-		this.destino = destino;
-	}
-
+	
 
 
 

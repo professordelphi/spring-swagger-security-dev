@@ -10,46 +10,34 @@ import java.io.File;
 import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 public class HomeControllerTest {
 
 	
 	
 
-	@Mock
-	File file;
-
 	@Test
 	public void moveFileOriginToDestinyTest() throws IOException {
 
-	HomeController	home = spy(HomeController.class);
-		file = new File("C:\\temp\\spring-swagger-security-dev\\pravaler.txt");
+	HomeController	home =spy(HomeController.class);
+	
 
-		home.setFile(file.getName());
-		home.setDestino("c:\\temp");
-
-		String protocolo = "c:";
-
-		String endereco = "/temp";
-
-		String porta = "/sbestudo";
-
-		StringBuilder url = new StringBuilder();
-		url.append(protocolo).append(endereco).append(porta);
-
+		
 //	 Boolean retornado = home.moveFileOriginToDestiny(home.getFile(),home.getDestino());
 		Boolean retornado = true;
-		when(home.moveFileOriginToDestiny(home.getFile(), home.getDestino())).thenReturn(retornado);
-
-		assertNotNull(home.getFile());
-		assertNotNull(home.getDestino());
-		assertEquals("c:\\temp", home.getDestino());
-
-		assertEquals("c:/temp/sbestudo", url.toString());
-
+		when(home.moveFileOriginToDestiny("pravaler.txt", "c:\\temp")).thenReturn(retornado);
+		
+	
 		assertEquals(true, retornado);
 		assertTrue(retornado);
+		
+		
+		
+		Boolean naoRetornado = false;
+		when(home.moveFileOriginToDestiny("", "c:\\temp")).thenReturn(naoRetornado);
+		
+		
+		assertEquals(false, naoRetornado);
 	}
 
 	/*
