@@ -1,6 +1,7 @@
 package com.sb.estudo.sbestudo.controller;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sb.estudo.sbestudo.entity.Funcionario;
@@ -35,7 +37,7 @@ public class FuncionarioController {
 	    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
 	@GetMapping("{id}")
-	public ResponseEntity<Funcionario> getOne(@PathVariable long id) throws ExceptFuncionario {
+	public ResponseEntity<Funcionario> getOne(@PathVariable  long id) throws ExceptFuncionario {
 		Funcionario funcionario = this.funcionarioService.getOne(id).get();
 
 		if (funcionario.equals(null))
@@ -45,7 +47,7 @@ public class FuncionarioController {
 	}
 
 	@GetMapping("/url/{id}")
-	public ResponseEntity<Optional<Funcionario>> urlHateoas(@PathVariable long id) {
+	public ResponseEntity<Optional<Funcionario>> urlHateoas(@PathVariable("id") long id) {
 		Optional<Funcionario> funcionario = this.funcionarioService.getOne(id);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("").buildAndExpand(funcionario.get())
@@ -70,5 +72,31 @@ public class FuncionarioController {
 	//	return ResponseEntity.created(location).build();
 
 	}
+	
+	@GetMapping
+	public ResponseEntity<List<Funcionario>> getAllFunc() throws ExceptFuncionario {
+		List<Funcionario> funcionario = this.funcionarioService.findAll();
+
+		if (funcionario.equals(null))
+			throw new ExceptFuncionario("Funcionario nao encontrado");
+
+		return ResponseEntity.ok(funcionario);
+	}
+	
+	@GetMapping("/rest")
+	public void getForObject() {
+		// request url
+		String url = "https://jsonplaceholder.typicode.com/posts/1";
+
+		// create an instance of RestTemplate
+		RestTemplate restTemplate = new RestTemplate();
+
+		// make an HTTP GET request
+	//	String json = restTemplate.getForObject(url, String.class);
+
+		String json = restTemplate.getForObject(url, String.class);
+		// print json
+		System.out.println(json);
+		}
 
 }

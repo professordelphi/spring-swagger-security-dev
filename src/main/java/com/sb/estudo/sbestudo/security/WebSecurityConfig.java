@@ -31,12 +31,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		auth.userDetailsService(userDetailsService)
-		.passwordEncoder(new BCryptPasswordEncoder());
+	//	auth.userDetailsService(userDetailsService)
+//		.passwordEncoder(new BCryptPasswordEncoder());
+		auth.inMemoryAuthentication().withUser("dev").password("{noop}123").roles("ADMIN");
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception{
-		web.ignoring().antMatchers("http:/localhost:8084/swagger-ui.html", "/style/**");
+		web.ignoring().antMatchers("/swagger-ui.html", "/style/**");
 	}
 }

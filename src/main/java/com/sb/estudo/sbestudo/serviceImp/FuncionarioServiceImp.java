@@ -1,5 +1,6 @@
 package com.sb.estudo.sbestudo.serviceImp;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,12 @@ public class FuncionarioServiceImp implements FuncionarioService {
 		return this.funcionarioRepository.save(funcionarioRequest);
 		
 		
+	}
+
+	@Override
+	public List<Funcionario> findAll() {
+		// TODO Auto-generated method stub
+		return this.funcionarioRepository.findAll();
 	}
 	
 	
