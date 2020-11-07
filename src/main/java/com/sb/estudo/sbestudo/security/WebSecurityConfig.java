@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
@@ -41,48 +40,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       *  
       */
                 // ... here goes your custom security configuration
-  /*      http.
+ /*        http.
          authorizeRequests().
                 antMatchers(AUTH_WHITELIST).permitAll().  // whitelist Swagger UI resources
                 // ... here goes your custom security configuration
                 antMatchers("/**").authenticated();  // require authentication for any endpoint that's not whitelisted
-    */   
+   */     
         
-        http
+  /*      http
         .authorizeRequests().antMatchers("/").permitAll()
-        .antMatchers(AUTH_WHITELIST).permitAll()
         .anyRequest().authenticated()
-   // .and()
-    //   .formLogin().loginPage("/cad").permitAll();
-  .and().formLogin().permitAll();
-    //    .and()
-     //   .logout().logoutUrl("/logout").permitAll();
-
-        System.out.println(http.toString());
-      //  System.out.print(http.build());
-    	
-//http.csrf().disable();
-//http.headers().frameOptions().disable();
+    .and()
+       .formLogin().loginPage("/cad").permitAll()
+  .and().formLogin().permitAll()
+        .and()
+        .logout().logoutUrl("/logout").permitAll();
+*/
+http.csrf().disable();
+http.headers().frameOptions().disable();
     }
 
 @Override
 protected void configure(AuthenticationManagerBuilder auth) throws Exception
 {
-//auth.inMemoryAuthentication().withUser("dev").password("123").roles("USER","ADMIN");
-//log.info(auth.build().toString());
-//log.info(auth.toString());
-
-//auth
-// enable in memory based authentication with a user named
-// "user" and "admin"
-//.inMemoryAuthentication().withUser("user").password("password").roles("USER").and()
-  //              .withUser("admin").password("password").roles("USER", "ADMIN");
-
-auth.inMemoryAuthentication()
-.withUser("user").password("{noop}password").roles("USER")
-.and()
-.withUser("admin").password("{noop}password").roles("ADMIN");
-
+auth.inMemoryAuthentication().withUser("dev").password("123").roles("ADMIN");
 }	
 
 
