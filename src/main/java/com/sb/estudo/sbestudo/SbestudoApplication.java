@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Controller
 @ComponentScan({ "com.sb.estudo.sbestudo.*" })
 @EnableSwagger2
-@EnableWebSecurity
+@EnableWebSecurity  // origin do hd externo
 public class SbestudoApplication {
 
 	public static void main(String[] args) {
