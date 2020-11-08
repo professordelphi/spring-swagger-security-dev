@@ -13,7 +13,7 @@ import com.sb.estudo.sbestudo.service.FuncionarioService;
 @Service
 public class FuncionarioServiceImp implements FuncionarioService {
 
-	@Autowired
+	@Autowired(required = true)
 	FuncionarioRepository funcionarioRepository;
 	
 	@Override

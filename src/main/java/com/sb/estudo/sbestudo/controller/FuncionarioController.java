@@ -16,7 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.sb.estudo.sbestudo.entity.Funcionario;
 import com.sb.estudo.sbestudo.except.ExceptFuncionario;
-import com.sb.estudo.sbestudo.serviceImp.FuncionarioServiceImp;
+import com.sb.estudo.sbestudo.service.FuncionarioService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -26,8 +26,8 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/api/v1")
 public class FuncionarioController {
 
-	@Autowired
-	FuncionarioServiceImp funcionarioService;
+	@Autowired(required = true)
+	FuncionarioService funcionarioService;
 
 
 	@ApiOperation(value = "Retorna uma lista de pessoas")
@@ -99,4 +99,11 @@ public class FuncionarioController {
 		System.out.println(json);
 		}
 
+	
+	@GetMapping("/hellotest")
+	public String testarHello()
+	{
+		return "Hello";
+		
+	}
 }
