@@ -34,7 +34,7 @@ public class FuncionarioController {
 	    @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
 	    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Funcionario> getOne(@PathVariable long id) throws ExceptFuncionario {
 		Funcionario funcionario = this.funcionarioService.getOne(id).get();
 
