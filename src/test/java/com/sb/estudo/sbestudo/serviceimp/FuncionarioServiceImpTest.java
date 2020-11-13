@@ -7,6 +7,7 @@ package com.sb.estudo.sbestudo.serviceimp;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.standaloneSetup;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -45,6 +46,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.sb.estudo.sbestudo.controller.FuncionarioController;
 import com.sb.estudo.sbestudo.entity.Funcionario;
+import com.sb.estudo.sbestudo.repository.FuncionarioRepository;
 import com.sb.estudo.sbestudo.serviceImp.FuncionarioServiceImp;
 
 import io.restassured.http.ContentType;
@@ -63,34 +65,34 @@ public class FuncionarioServiceImpTest {
 	
 	@MockBean
 	private FuncionarioServiceImp funcionarioServiceImp;
+
+	@MockBean
+	private FuncionarioRepository funcionarioRepository;
 	
-//	@Rule
-  //   public ExpectedException thrown = ExpectedException.none();
-	
-	
+
 	@BeforeEach
 	public void setup()
 	{
 	standaloneSetup(this.funcionarioController);
 		
-	}
+}
 	
 	
 	
 	@Test
 	public void funcionario_findByOne() throws Exception
 	{
-		Funcionario funcionario=new Funcionario("Marcos", "12345678981", "Rua x");
+		Funcionario funcionario=new Funcionario(1L,"Marcos", "12345678981", "Rua x");
 		when(this.funcionarioServiceImp.getOne(1L)).thenReturn(Optional.of(funcionario));
-		/* Funcionario funcionarioSalvo = 		this.funcionarioRepository.save(funcionario);*/
-	//assertThat(funcionario.getNome()).isEqualTo("Marcos");
-	//	this.funcionarioRepository.findById(funcionarioSalvo.getId());
-	//	assertThat(funcionarioRepository.findById(funcionarioSalvo.getId()));
+		 Funcionario funcionarioSalvo = 		this.funcionarioServiceImp.salvar(funcionario);
+	     assertThat(funcionario.getNome()).isEqualTo("Marcos");
+		this.funcionarioRepository.findById(funcionario.getId());
+		assertThat(funcionarioRepository.findById(funcionario.getId()));
 
 	given()
 	.accept(ContentType.JSON)
 	.when()
-	.get("/api/v1/{id}",1L)
+	.get("http://localhost:8082/api/v1/{id}",1L)
 	.then()
 	.statusCode(HttpStatus.SC_OK);
 	
